@@ -51,6 +51,7 @@ bool VaapiPicture::render()
     }
 
     VAStatus status;
+    INFO("vaBeginPicture on id 0x%x", m_surface->getID());
     status = vaBeginPicture(m_display->getID(), m_context->getID(), m_surface->getID());
     if (!checkVaapiStatus(status, "vaBeginPicture()"))
         return false;
@@ -77,6 +78,7 @@ bool VaapiPicture::render(BufObjectPtr& buffer)
     if (bufferID == VA_INVALID_ID)
         return false;
 
+    INFO("Render bufferID 0x%x", bufferID);
     status = vaRenderPicture(m_display->getID(), m_context->getID(), &bufferID, 1);
     if (!checkVaapiStatus(status, "vaRenderPicture failed"))
         return false;
@@ -111,6 +113,7 @@ bool VaapiPicture::addObject(std::vector < BufObjectPtr >& objects,
 
 bool VaapiPicture::sync()
 {
+	INFO("vaSyncSurface id 0x%x", getSurfaceID());
     return vaSyncSurface(m_display->getID(), getSurfaceID()) == VA_STATUS_SUCCESS;
 }
 }

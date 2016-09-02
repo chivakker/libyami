@@ -51,7 +51,7 @@ private:
     YamiStatus encodePicture(const PicturePtr&);
     bool fill(VAEncSequenceParameterBufferVP9*) const;
     bool fill(VAEncPictureParameterBufferVP9*, const PicturePtr&,
-              const SurfacePtr&) const;
+              const SurfacePtr&);
     bool fill(VAEncMiscParameterTypeVP9PerSegmantParam* segParam) const;
     bool ensureSequence(const PicturePtr&);
     bool ensurePicture(const PicturePtr&, const SurfacePtr&);
@@ -67,6 +67,7 @@ private:
     }
 
     int m_frameCount;
+    int m_currentReferenceIndex;
 
     int m_maxCodedbufSize;
 
